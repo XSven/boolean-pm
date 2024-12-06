@@ -1,4 +1,4 @@
-use Test::More tests => 61;
+use Test::More tests => 63;
 use strict;
 use lib 'lib';
 
@@ -42,6 +42,8 @@ ok isBoolean(!(false)), '! boolean returns boolean';
 # Test true in various contexts
 my $t = true;
 
+ok &{$t}, 'sub dereferencing overloading';
+
 is ref($t), 'boolean', "ref(true) eq 'boolean'";
 
 is "$t", "1", "true stringifies to '1'";
@@ -63,6 +65,8 @@ ok $t == 1, 'true == 0';
 
 # Test false in various contexts
 my $f = false;
+
+ok !&{$f}, 'sub dereferencing overloading';
 
 ok $f eq false, '$f eq false';
 ok $f == false, '$f == false';

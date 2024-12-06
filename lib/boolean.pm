@@ -7,6 +7,7 @@ my ($true, $false);
 use overload
     '""' => sub { 0+${$_[0]} },
     '!' => sub { ${$_[0]} ? $false : $true },
+    '&{}' => sub { my $bool = ${$_[0]}; sub { $bool } },
     fallback => 1;
 
 use base 'Exporter';
