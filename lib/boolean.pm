@@ -5,7 +5,7 @@ our $VERSION = '0.46';
 my ($true, $false);
 
 use overload
-    '""' => sub { ${$_[0]} },
+    '""' => sub { 0+${$_[0]} },
     '!' => sub { ${$_[0]} ? $false : $true },
     fallback => 1;
 
@@ -27,8 +27,8 @@ sub import {
 my ($true_val, $false_val, $bool_vals);
 
 BEGIN {
-    my $t = 1;
-    my $f = 0;
+    my $t = !!1;
+    my $f = !!0;
     $true  = do {bless \$t, 'boolean'};
     $false = do {bless \$f, 'boolean'};
 
